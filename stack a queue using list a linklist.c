@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ========== LIST (mảng động) ========== */
+/* LIST*/
 typedef struct {
     int *a;
     int n, cap;
-    int front;          // chỉ dùng cho Queue
+    int front;          // for Queue
 } List;
 
 void list_add(List *l, int x) {
@@ -16,15 +16,15 @@ void list_add(List *l, int x) {
     l->a[l->n++] = x;
 }
 
-/* Stack bằng List */
+/* Stack using List */
 void push(List *l, int x) { list_add(l, x); }
 int  pop(List *l)         { return l->a[--l->n]; }
 
-/* Queue bằng List */
+/* Queue using List */
 void enqueue(List *l, int x) { list_add(l, x); }
 int  dequeue(List *l)        { return l->a[l->front++]; }
 
-/* ========== LINKED LIST ========== */
+/* LINKED LIST */
 typedef struct Node {
     int val;
     struct Node *next;
@@ -50,7 +50,7 @@ int remove_head(LinkedList *l) {
     return x;
 }
 
-/* Stack bằng Linked list: thêm/lấy ở head */
+/* Stack using Linked list: thêm/lấy ở head */
 void push_ll(LinkedList *l, int x) {
     Node *p = new_node(x);
     p->next = l->head;
@@ -59,7 +59,7 @@ void push_ll(LinkedList *l, int x) {
 }
 int pop_ll(LinkedList *l) { return remove_head(l); }
 
-/* Queue bằng Linked list: thêm ở tail, lấy ở head */
+/* Queue using Linked list: thêm ở tail, lấy ở head */
 void enqueue_ll(LinkedList *l, int x) {
     Node *p = new_node(x);
     if (l->tail) l->tail->next = p;
@@ -68,13 +68,13 @@ void enqueue_ll(LinkedList *l, int x) {
 }
 int dequeue_ll(LinkedList *l) { return remove_head(l); }
 
-/* ========== MAIN ========== */
+/* MAIN */
 int main(void) {
     List stackL = {0}, queueL = {0};
     LinkedList stackN = {0}, queueN = {0};
     int n, x;
 
-    printf("Nhap so phan tu: ");
+    printf("So phan tu: ");
     scanf("%d", &n);
     printf("Nhap %d so: ", n);
     for (int i = 0; i < n; i++) {
